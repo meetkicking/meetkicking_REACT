@@ -1,7 +1,9 @@
+import { useState } from "react";
 import Promo from "./components/Promo/Promo";
 import Card from "./components/Card";
 import {Header, Footer} from "./components/General";
 import cardsData from "./assets/data.json";
+import Search from "./components/Search";
 
 const sizes = ["sm", "lg", "md"];
 const adds = [];
@@ -21,10 +23,11 @@ while(n--) {
 }
 
 const App = () => {
-    const user = localStorage.getItem("rockUser");
+    const [goods, setGoods] = useState(cardsData);
+    const [user, setUser] = useState(localStorage.getItem("rockUser"));
     return (
 <div>
-    <Header user={user}/>
+    <Header user={user} setUser={setUser}/>
     <div className="container">
         {adds.map((el, index) => <Promo key={index} {...el} type={el.sizes}/>)}
         {/*<Card 
@@ -33,7 +36,8 @@ const App = () => {
         price={cardsData[0].price}
         />
         */}
-        {cardsData.map((el, index) => <Card
+        <Search array={cardsData} upd={setGoods}/>
+        {goods.map((el, index) => <Card
         key={index}
         img={el.pictures}
         name={el.name}

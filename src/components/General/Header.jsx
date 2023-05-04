@@ -1,13 +1,15 @@
 import Logo from "./Logo";
 
-const Header = ({user}) => {
+const Header = ({user, setUser}) => {
     const logOut = (event) => {
         event.preventDefault();
+        setUser("");
         localStorage.removeItem("rockUser");
     }
 
     const logIn = (event) => {
         event.preventDefault();
+        setUser("Meetkicking");
         localStorage.setItem("rockUser", "Meetkicking");
     }
 
