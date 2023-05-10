@@ -1,10 +1,11 @@
 import Logo from "./Logo";
 
-const Header = ({user, setUser}) => {
+const Header = ({user, setUser, setModalActive}) => {
     const logOut = (event) => {
         event.preventDefault();
-        setUser("");
-        localStorage.removeItem("rockUser");
+        //setUser("");
+        //localStorage.removeItem("rockUser");
+        setModalActive(true);
     }
 
     const logIn = (event) => {
