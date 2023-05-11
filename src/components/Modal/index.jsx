@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./style.css";
 
-const Modal = ({active, setActive}) => {
+const Modal = ({active, setActive, setUser}) => {
     const [auth, setAuth] = useState(true);
 
     //pwr-password
@@ -65,6 +65,7 @@ const Modal = ({active, setActive}) => {
                     localStorage.setItem("rockUser", dataLog.data.name);
                     clearForm();
                     setActive(false);
+                    setUser(dataLog.data.name);
                 }
             }
             else {
@@ -72,6 +73,7 @@ const Modal = ({active, setActive}) => {
                         localStorage.setItem("rockUser", data.data.name);
                         clearForm();
                         setActive(false);
+                        setUser(data.data.name);
                 }
             }
         }

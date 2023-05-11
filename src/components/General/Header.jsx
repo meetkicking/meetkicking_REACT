@@ -1,17 +1,15 @@
 import Logo from "./Logo";
+import { Link } from "react-router-dom";
+import { Folder2, Star, Cart4, PersonSquare, BoxArrowInRight } from "react-bootstrap-icons";
 
-const Header = ({user, setUser, setModalActive}) => {
-    const logOut = (event) => {
-        event.preventDefault();
-        //setUser("");
-        //localStorage.removeItem("rockUser");
-        setModalActive(true);
-    }
+const Header = ({user, setModalActive}) => {
+    
 
     const logIn = (event) => {
         event.preventDefault();
-        setUser("Meetkicking");
-        localStorage.setItem("rockUser", "Meetkicking");
+        //setUser("Meetkicking");
+        //localStorage.setItem("rockUser", "Meetkicking");
+        setModalActive(true);
     }
 
     return <header>
@@ -19,12 +17,23 @@ const Header = ({user, setUser, setModalActive}) => {
         <div className="search"></div>
         <nav className="header__menu">
         {user && <>
-            <a href="">Избранное</a>
-            <a href="">Корзина</a>
-            <a href="">Профиль</a>
-            <a href="" onClick={logOut}>Выйти</a>
+            <Link to="/catalog" title="Каталог">
+                <Folder2/>
+            </Link>
+            <Link to="/" title="Избранное">
+                <Star/>
+            </Link>
+            <Link to="/" title="Корзина">
+                <Cart4/>
+            </Link>
+            <Link to="/profile" title="Профиль">
+                <PersonSquare/>
+            </Link>
+            
         </>}
-        {!user && <a href="" onClick={logIn}>Войти</a>}
+        {!user && <a href="" onClick={logIn} title="Войти">
+                <BoxArrowInRight/>
+            </a>}
         </nav>
     </header>
 }
