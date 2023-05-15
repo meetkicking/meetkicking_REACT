@@ -13,6 +13,8 @@ const Profile = ({ user, color, setUser }) => {
         event.preventDefault();
         setUser("");
         localStorage.removeItem("rockUser");
+        localStorage.removeItem("rockToken");
+        localStorage.removeItem("rockId");
         navigate("/");
         //setModalActive(true);
     }

@@ -63,6 +63,8 @@ const Modal = ({active, setActive, setUser}) => {
                 let dataLog = await resLog.json();
                 if (!dataLog.err) {
                     localStorage.setItem("rockUser", dataLog.data.name);
+                    localStorage.setItem("rockToken", dataLog.token);
+                    localStorage.setItem("rockId", dataLog.data._id);
                     clearForm();
                     setActive(false);
                     setUser(dataLog.data.name);
@@ -71,6 +73,8 @@ const Modal = ({active, setActive, setUser}) => {
             else {
                     if (!data.err) {
                         localStorage.setItem("rockUser", data.data.name);
+                        localStorage.setItem("rockToken", data.token);
+                        localStorage.setItem("rockId", data.data._id);
                         clearForm();
                         setActive(false);
                         setUser(data.data.name);
