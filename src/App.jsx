@@ -9,6 +9,7 @@ import Draft from "./pages/Draft";
 import Main from "./pages/Main";
 import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
+import Product from "./pages/Product";
 
 const App = () => { 
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
@@ -28,13 +29,13 @@ const App = () => {
         .then(responce => responce.json())
         .then(data => {
             console.log(data);
-            setServerGoods(data.products); 
+            setServerGoods(data.products);
         })
     }
     }, [token])
 
     useEffect(() => {
-        console.log("отметка");
+        console.log("=)");
         setGoods(serverGoods);
     }, [serverGoods])
 
@@ -62,13 +63,15 @@ const App = () => {
 <>
     <Header user={user} setModalActive={setModalActive}/>
     <main>
-    <Search array={[]} upd={() => {}}/>
+
+    <Search array={serverGoods} upd={setGoods}/>
 
     <Routes>
         <Route path="/" element={<Main/>}/>
-        <Route path="/catalog" element={<Catalog/>}/>
+        <Route path="/catalog" element={<Catalog goods={goods}/>}/>
         <Route path="/draft" element={<Draft/>}/>
         <Route path="/profile" element={<Profile user={user} setUser={setUser} color="yellow"/>}/>
+        <Route path="/product/:id" element={<Product token={token}/>}/>
     </Routes>
     
     </main>

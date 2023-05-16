@@ -1,8 +1,11 @@
-const Catalog = () => {
+import Card from "../components/Card";
+
+//g в map - товар
+const Catalog = ({goods}) => {
     return (
-        <>
-        <h1>Каталог товаров</h1>
-        </>
+        <div className="container">
+        {goods.map(g => <Card key={g._id} {...g} img={g.pictures}/>)}
+        </div>
     )
 }
 

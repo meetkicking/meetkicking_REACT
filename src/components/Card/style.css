@@ -6,6 +6,8 @@
     color: #222;
     border-radius: 4px;
     text-align: center;
+    position: relative;
+    align-content: space-between;
 
 }
 
@@ -26,4 +28,24 @@
 
 .card__btn:hover {
     background-color: chocolate;
+}
+
+.card__discount {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background-color: pink;
+    padding: 4px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.card__like {
+    color: crimson;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 4px;
+    cursor: pointer;
 }
