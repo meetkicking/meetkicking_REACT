@@ -10,10 +10,12 @@ import Main from "./pages/Main";
 import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
+import Favorites from "./pages/Favorites";
 
 const App = () => { 
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
+    const [userId, setUserId] = useState(localStorage.getItem("rockId"));
     const [serverGoods, setServerGoods] = useState([]);
     const [goods, setGoods] = useState(serverGoods);
 
@@ -35,25 +37,29 @@ const App = () => {
     }, [token])
 
     useEffect(() => {
-        console.log("=)");
-        setGoods(serverGoods);
+        if (!goods.length) {
+            console.log("=)");
+            setGoods(serverGoods);
+        }
     }, [serverGoods])
 
-    useEffect(() => {
-        console.log("hello!");
-    })
+    //useEffect(() => {
+    //    console.log("hello!");
+    //})
 
     //useEffect(() => {
     //    console.log("Модалка изменилась");
     //}, [modalActive])
 
      useEffect(() => {
-        console.log("Change User");
+        //console.log("Change User");
         if (user) {
             setToken(localStorage.getItem("rockToken"));
+            setUserId(localStorage.getItem("rockId"));
         }
         else {
             setToken("");
+            setUserId("");
         }
         console.log("u", user);
         console.log("t", token);
@@ -61,14 +67,22 @@ const App = () => {
 
     return (
 <>
-    <Header user={user} setModalActive={setModalActive}/>
+    <Header user={user} setModalActive={setModalActive} serverGoods={serverGoods}/>
     <main>
 
     <Search array={serverGoods} upd={setGoods}/>
 
     <Routes>
         <Route path="/" element={<Main/>}/>
-        <Route path="/catalog" element={<Catalog goods={goods}/>}/>
+        <Route path="/catalog" element={<Catalog 
+        goods={goods} 
+        setServerGoods={setServerGoods}
+        />}/>
+        <Route path="/favorites" element={<Favorites 
+        goods={goods} 
+        userId={userId}
+        setServerGoods={setServerGoods}
+        />}/>
         <Route path="/draft" element={<Draft/>}/>
         <Route path="/profile" element={<Profile user={user} setUser={setUser} color="yellow"/>}/>
         <Route path="/product/:id" element={<Product token={token}/>}/>

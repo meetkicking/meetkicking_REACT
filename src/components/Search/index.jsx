@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "./style.css"
 
@@ -10,6 +10,17 @@ const Search = ({array, upd}) => {
     const [quantity, setQuantity] = useState(array.length);
 
     const [count, updateCount] = useState(0);
+
+    useEffect(() => {
+        if (text) {
+        let result = array.filter(element => element.name.toLowerCase().includes(text.toLowerCase()));
+        upd(result);
+        setQuantity(result.length);
+        } else {
+            upd(array);
+            setQuantity(array.length);
+        }
+    }, [array]);
 
     let n = 1;
     const click = () => {
