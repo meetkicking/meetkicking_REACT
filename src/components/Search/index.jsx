@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
+import Ctx from "../../context";
 import "./style.css"
 
-const Search = ({array, upd}) => {
+const Search = ({array}) => {
     // let text = "Bass";
+
+    const {setGoods} = useContext(Ctx);
 
     const [text, setText] = useState("");
 
@@ -14,10 +16,10 @@ const Search = ({array, upd}) => {
     useEffect(() => {
         if (text) {
         let result = array.filter(element => element.name.toLowerCase().includes(text.toLowerCase()));
-        upd(result);
+        setGoods(result);
         setQuantity(result.length);
         } else {
-            upd(array);
+            setGoods(array);
             setQuantity(array.length);
         }
     }, [array]);
@@ -33,7 +35,7 @@ const Search = ({array, upd}) => {
         let val = event.target.value;
         setText(val);
         let result = array.filter(element => element.name.toLowerCase().includes(val.toLowerCase()));
-        upd(result);
+        setGoods(result);
         setQuantity(result.length);
         console.log(result);
     }

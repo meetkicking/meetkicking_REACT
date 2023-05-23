@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import {Routes, Route} from "react-router-dom";
+import Ctx from "./context";
 
 import {Header, Footer} from "./components/General";
 import Modal from "./components/Modal";
@@ -13,11 +14,25 @@ import Product from "./pages/Product";
 import Favorites from "./pages/Favorites";
 
 const App = () => { 
+
+    "https://newsapi.org/v2/everything?apiKey=74b7b9c214584eaab09d1b35f0a153ce&q=dogs"
+
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
     const [userId, setUserId] = useState(localStorage.getItem("rockId"));
     const [serverGoods, setServerGoods] = useState([]);
     const [goods, setGoods] = useState(serverGoods);
+
+    const [news, setNews] = useState([]);
+
+    useEffect(() => {
+        fetch("https://newsapi.org/v2/everything?&q=животные&sources=lenta&apiKey=74b7b9c214584eaab09d1b35f0a153ce")
+        .then(responce => responce.json())
+        .then(data => {
+            console.log(data);
+            setNews(data.articles);
+        })
+    }, [])
 
     const [modalActive, setModalActive] = useState(false);
 
@@ -66,16 +81,20 @@ const App = () => {
      }, [user])
 
     return (
-<>
+<Ctx.Provider value={{
+    goods, 
+    setGoods,
+    news,
+
+}}>
     <Header user={user} setModalActive={setModalActive} serverGoods={serverGoods}/>
     <main>
 
-    <Search array={serverGoods} upd={setGoods}/>
+    <Search array={serverGoods} />
 
     <Routes>
         <Route path="/" element={<Main/>}/>
         <Route path="/catalog" element={<Catalog 
-        goods={goods} 
         setServerGoods={setServerGoods}
         />}/>
         <Route path="/favorites" element={<Favorites 
@@ -95,7 +114,7 @@ const App = () => {
         setActive={setModalActive}
         setUser={setUser}
     />
-</>
+</Ctx.Provider>
     )
 }
 
