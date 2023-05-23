@@ -15,7 +15,7 @@ import Favorites from "./pages/Favorites";
 
 const App = () => { 
 
-    "https://newsapi.org/v2/everything?apiKey=74b7b9c214584eaab09d1b35f0a153ce&q=dogs"
+    //"https://newsapi.org/v2/everything?apiKey=74b7b9c214584eaab09d1b35f0a153ce&q=dogs"
 
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
@@ -26,7 +26,7 @@ const App = () => {
     const [news, setNews] = useState([]);
 
     useEffect(() => {
-        fetch("https://newsapi.org/v2/everything?&q=животные&sources=lenta&apiKey=74b7b9c214584eaab09d1b35f0a153ce")
+        fetch("https://newsapi.org/v2/everything?q=животные&sources=lenta&apiKey=74b7b9c214584eaab09d1b35f0a153ce")
         .then(responce => responce.json())
         .then(data => {
             console.log(data);
