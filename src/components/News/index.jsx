@@ -26,10 +26,9 @@ const News = () => {
         <div>
             <h2>новости Lenta.ru</h2>
             <div className="news-block">
-                {data.slice(0, 5).map((el, ind) => <img 
+                {data.slice(0, 6).map((el, ind) => <img 
                 key={ind} 
-                src={el.urlToImage
-                } 
+                src={el.urlToImage} 
                 alt={el.title}
                 />)}
             </div>

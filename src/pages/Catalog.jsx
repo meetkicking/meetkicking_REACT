@@ -1,4 +1,5 @@
 import Card from "../components/Card";
+import Pagination from "../components/Pagination";
 import { useState, useContext } from "react";
 import Ctx from "../context";
 
@@ -28,6 +29,7 @@ const Catalog = ({setServerGoods}) => {
 
     return (
         <div className="container">
+        <div style={{gridColumnEnd: "span 4"}}><Pagination/></div>
         <div style={filterSt}>
             <button style={{background: sort === "up" ? "orange" : "white"}}
             onClick={() => SortHandler("up")}
