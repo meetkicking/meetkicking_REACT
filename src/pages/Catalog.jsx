@@ -1,12 +1,12 @@
 import Card from "../components/Card";
 import Pagination from "../components/Pagination";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import usePagination from "../hooks/usePagination";
 import Ctx from "../context";
 
 //g в map - товар
 const Catalog = ({setServerGoods}) => {
-    const {goods} = useContext(Ctx);
+    const {goods, text} = useContext(Ctx);
     const paginate = usePagination(goods, 20);
     const [sort, setSort] = useState(null);
 
@@ -15,6 +15,10 @@ const Catalog = ({setServerGoods}) => {
         display: "flex",
         gap: "20px"
     }
+
+    useEffect(() => {
+        paginate.step(1);
+    }, [text])
 
     const SortHandler = (vector) => {
         if (vector === sort) {
@@ -42,7 +46,7 @@ const Catalog = ({setServerGoods}) => {
             <button>Новинки</button>
             <button>Скидки</button>
         </div>
-        {paginate.setDataPerPage.map(g => <Card 
+        {paginate.setDataPerPage().map(g => <Card 
         key={g._id} 
         {...g} 
         img={g.pictures}

@@ -5,9 +5,9 @@ import "./style.css"
 const Search = ({array}) => {
     // let text = "Bass";
 
-    const {setGoods} = useContext(Ctx);
+    const {setGoods, text, setText} = useContext(Ctx);
 
-    const [text, setText] = useState("");
+    //const [text, setText] = useState("");
 
     const [quantity, setQuantity] = useState(array.length);
 

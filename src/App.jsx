@@ -20,6 +20,7 @@ const App = () => {
     const [user, setUser] = useState(localStorage.getItem("rockUser"));
     const [token, setToken] = useState(localStorage.getItem("rockToken"));
     const [userId, setUserId] = useState(localStorage.getItem("rockId"));
+    const [text, setText] = useState("");
     const [serverGoods, setServerGoods] = useState([]);
     const [goods, setGoods] = useState(serverGoods);
 
@@ -85,6 +86,8 @@ const App = () => {
     goods, 
     setGoods,
     news,
+    text,
+    setText
 
 }}>
     <Header user={user} setModalActive={setModalActive} serverGoods={serverGoods}/>
