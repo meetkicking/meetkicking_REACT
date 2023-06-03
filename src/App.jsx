@@ -12,6 +12,7 @@ import Catalog from "./pages/Catalog";
 import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites";
+import Add from "./pages/AddProduct";
 
 const App = () => { 
 
@@ -100,6 +101,7 @@ const App = () => {
         <Route path="/catalog" element={<Catalog 
         setServerGoods={setServerGoods}
         />}/>
+        <Route path="/add" element={<Add/>}/>
         <Route path="/favorites" element={<Favorites 
         goods={goods} 
         userId={userId}
