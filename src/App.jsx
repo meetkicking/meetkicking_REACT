@@ -86,9 +86,12 @@ const App = () => {
 <Ctx.Provider value={{
     goods, 
     setGoods,
+    setServerGoods,
     news,
     text,
-    setText
+    setText,
+    userId,
+    token
 
 }}>
     <Header user={user} setModalActive={setModalActive} serverGoods={serverGoods}/>

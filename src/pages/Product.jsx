@@ -1,11 +1,15 @@
-import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
+import {Trash} from "react-bootstrap-icons";
+import Ctx from "../context";
 
 import Loader from "../components/Loader";
 
 const Product = () => {
     const [product, setProduct] = useState({});
     const {id} = useParams();
+    const navigate = useNavigate();
+    const {token, userId, setServerGoods} = useContext(Ctx);
 
     useEffect(() => {
         fetch(`https://api.react-learning.ru/products/${id}`, {
@@ -23,12 +27,28 @@ const Product = () => {
         })
     }, []);
 
+    const del = () => {
+        fetch(`https://api.react-learning.ru/products/${id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        .then(responce => responce.json())
+        .then(data => {
+            console.log(data);
+            setServerGoods(prev => prev.filter(el => el._id !== id))
+            navigate("/catalog");
+        })
+    }
+
     return (
         <>
         { product.name
         ? <>
+        {userId === product.author._id && <button style={{justifySelf: "flex-end"}} onClick={del}><Trash/></button>}
         <h1>{product.name}</h1>
-        <img src={product.pictures} alt={product.name} />
+        <img src={product.pictures} alt={product.name} height="300px" width="300px"/>
         <mark>{product.price}руб.</mark>
         </>
         : <Loader/>
