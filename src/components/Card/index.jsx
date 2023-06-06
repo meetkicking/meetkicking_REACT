@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import "./style.css";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowThroughHeart, ArrowThroughHeartFill, Percent } from "react-bootstrap-icons";
+import Ctx from "../../context";
 
 const Card = ({
     img, 
@@ -11,23 +12,18 @@ const Card = ({
     discount, 
     tags, 
     likes, 
-    setServerGoods
+    //setServerGoods
 }) => {
 
-    const [isLike, setIsLike] = useState(likes.includes(localStorage.getItem("rockId")));
+    const {setServerGoods, userId, api} = useContext(Ctx);
+
+    const [isLike, setIsLike] = useState(likes.includes(userId));
 
     const updLike = (event) => {
         event.stopPropagation();
         event.preventDefault();
         setIsLike(!isLike);
-        const token = localStorage.getItem("rockToken");
-        fetch(`https://api.react-learning.ru/products/likes/${_id}`, {
-            method: isLike ? "DELETE" : "PUT",
-            headers: {
-                "Authorization" : `Bearer ${token}`
-            }
-        })
-        .then(responce => responce.json())
+        api.setLike(_id, !isLike)
         .then(data => {
             console.log(data);
             setServerGoods(function (old) {

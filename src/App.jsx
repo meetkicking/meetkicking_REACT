@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import {Routes, Route} from "react-router-dom";
 import Ctx from "./context";
+import Api from "./api";
 
 import {Header, Footer} from "./components/General";
 import Modal from "./components/Modal";
@@ -26,6 +27,7 @@ const App = () => {
     const [goods, setGoods] = useState(serverGoods);
 
     const [news, setNews] = useState([]);
+    const [api, setApi] = useState(new Api(token));
 
     useEffect(() => {
         fetch("https://newsapi.org/v2/everything?q=животные&sources=lenta&apiKey=74b7b9c214584eaab09d1b35f0a153ce")
@@ -40,18 +42,19 @@ const App = () => {
 
     useEffect(() => {
         if (token) {
-        fetch("https://api.react-learning.ru/products", {
-            headers: {
-                "Authorization" : `Bearer ${token}`
-            }
-        })
-        .then(responce => responce.json())
-        .then(data => {
+        setApi(new Api(token));
+    }
+    }, [token])
+
+    useEffect(() => {
+        if (api.token) {
+            api.getProduct()
+            .then(data => {
             console.log(data);
             setServerGoods(data.products);
         })
-    }
-    }, [token])
+        }
+    }, [api.token])
 
     useEffect(() => {
         if (!goods.length) {
@@ -91,7 +94,8 @@ const App = () => {
     text,
     setText,
     userId,
-    token
+    token,
+    api
 
 }}>
     <Header user={user} setModalActive={setModalActive} serverGoods={serverGoods}/>
