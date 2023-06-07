@@ -14,6 +14,7 @@ import Profile from "./pages/Profile";
 import Product from "./pages/Product";
 import Favorites from "./pages/Favorites";
 import Add from "./pages/AddProduct";
+import Basket from "./pages/Basket";
 
 const App = () => { 
 
@@ -28,6 +29,15 @@ const App = () => {
 
     const [news, setNews] = useState([]);
     const [api, setApi] = useState(new Api(token));
+
+    let bStore = localStorage.getItem("rockBasket");
+    if (bStore) {
+        bStore = JSON.parse(bStore);
+    } else {
+        bStore = [];
+    }
+
+    const [basket, setBasket] = useState(bStore);
 
     useEffect(() => {
         fetch("https://newsapi.org/v2/everything?q=животные&sources=lenta&apiKey=74b7b9c214584eaab09d1b35f0a153ce")
@@ -45,6 +55,10 @@ const App = () => {
         setApi(new Api(token));
     }
     }, [token])
+
+    useEffect(() => {
+        localStorage.setItem("rockBasket", JSON.stringify(basket));
+    }, [basket])
 
     useEffect(() => {
         if (api.token) {
@@ -95,7 +109,9 @@ const App = () => {
     setText,
     userId,
     token,
-    api
+    api,
+    basket,
+    setBasket
 
 }}>
     <Header user={user} setModalActive={setModalActive} serverGoods={serverGoods}/>
@@ -117,6 +133,7 @@ const App = () => {
         <Route path="/draft" element={<Draft/>}/>
         <Route path="/profile" element={<Profile user={user} setUser={setUser} color="yellow"/>}/>
         <Route path="/product/:id" element={<Product token={token}/>}/>
+        <Route path="/basket" element={<Basket/>}/>
     </Routes>
     
     </main>

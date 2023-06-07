@@ -43,3 +43,30 @@ main {
 .container.bs {
    display: block;
 }
+
+table {
+  width: 100%;
+  background-color: white;
+  color: #222;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+td {
+  padding: .6rem 1rem;
+}
+
+td:first-child {
+  text-align: center;
+
+}
+
+thead td {
+  text-align: center;
+  font-weight: bold;
+
+}
+
+tbody tr:not(:last-child) td {
+  border-bottom: 1px solid silver;
+}

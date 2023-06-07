@@ -38,6 +38,11 @@
     background-color: chocolate;
 }
 
+.card__btn:disabled {
+    opacity: .6;
+    cursor: default;
+}
+
 .card__discount {
     position: absolute;
     top: 10px;

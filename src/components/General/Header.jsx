@@ -1,9 +1,9 @@
 import Logo from "./Logo";
 import { Link } from "react-router-dom";
 import { Folder2, Star, Cart4, PersonSquare, BoxArrowInRight, PlusSquare } from "react-bootstrap-icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 
-
+import Ctx from "../../context";
 
 const Header = ({user, setModalActive, serverGoods}) => {
 
@@ -11,9 +11,19 @@ const Header = ({user, setModalActive, serverGoods}) => {
 
     const [cartCnt, setCartCnt] = useState(0);
 
+    const {basket} = useState(Ctx);
+
     useEffect(() => {
         setLikeCnt(serverGoods.filter(element => element.likes.includes(localStorage.getItem("rockId"))).length);
     }, [serverGoods]);
+
+    {/*
+    useEffect(() => {
+        if (basket.length) {
+        setCartCnt(basket.reduce((acc, el) => acc + el.cnt, 0));
+        }
+    }, [basket])
+*/}
 
     const logIn = (event) => {
         event.preventDefault();
@@ -37,7 +47,7 @@ const Header = ({user, setModalActive, serverGoods}) => {
                 <Star/>
                 <span className="badge-item">{likeCnt}</span>
             </Link>
-            <Link to="/" title="Корзина" className="badge-el">
+            <Link to="/basket" title="Корзина" className="badge-el">
                 <Cart4/>
                 <span className="badge-item">{cartCnt}</span>
             </Link>
