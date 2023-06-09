@@ -67,6 +67,28 @@ thead td {
 
 }
 
-tbody tr:not(:last-child) td {
+tbody td {
   border-bottom: 1px solid silver;
+}
+
+tfoot td:first-child {
+  text-align: right;
+  text-transform: uppercase;
+  
+}
+
+tfoot td {
+  vertical-align: bottom;
+  line-height: 1;
+}
+
+tfoot td:last-child {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+tfoot del {
+  padding-left: 2em;
+  font-size: .8em;
+  color: silver;
 }

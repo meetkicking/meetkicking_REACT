@@ -65,6 +65,7 @@ const App = () => {
             api.getProduct()
             .then(data => {
             console.log(data);
+            //const result = data.products.filter(el => el.tags.includes("df"));
             setServerGoods(data.products);
         })
         }

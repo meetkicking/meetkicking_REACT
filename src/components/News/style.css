@@ -8,8 +8,9 @@
 .news-block img {
     width: 100%;
     border-radius: 8px;
-    animation: slide 2000ms linear infinite;
 }
+    {/*
+        animation: slide 2000ms linear infinite;
 
 .news-block :last-child {
     position: absolute;
@@ -19,7 +20,7 @@
     transform: translate(calc(100% + 20px), 0);
     animation: slideLast 2000ms linear infinite;
 }
-
+*/}
 @keyframes slide {
     from {
         transform: translate(0, 0);

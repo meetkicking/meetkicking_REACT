@@ -4,10 +4,41 @@ import { Link } from "react-router-dom";
 import Ctx from "../context";
 
 const Basket = () => {
-    const {basket} =useContext(Ctx);
+    const {basket, setBasket} = useContext(Ctx);
     const setPrice = ({price, discount, cnt}) => {
         return price * cnt * (1 - discount / 100)
     } 
+
+    const sum = basket.reduce((acc, el) => {
+        return acc + el.cnt * el.price
+    }, 0)
+
+    const sale = basket.reduce((acc, el) => {
+        return acc + el.cnt * el.price * (1 - el.discount / 100)
+    }, 0)
+
+    const inc = (id) => {
+        setBasket(prev => prev.map(el => {
+            if (el.id === id) {
+                el.cnt++;
+            }
+            return el;
+        }))
+    }
+
+    const dec = (id, cnt) => {
+        if (cnt === 1) {
+            setBasket(prev => prev.filter(el => el.id !== id))
+        } else {
+        setBasket(prev => prev.map(el => {
+            if (el.id === id) {
+                el.cnt--;
+            }
+            return el;
+        }))
+    }
+}
+
     return (
         <>
         <h1>Корзина</h1>
@@ -28,18 +59,24 @@ const Basket = () => {
                         <img src={el.img} alt={el.name} height="50"/>
                     </td>
                     <td>
-                        {el.name}
+                        <Link to={`/product/${el.id}`}>{el.name}</Link>
                     </td>
                     <td>
-                        <button>-</button>
+                        <button onClick={() => dec(el.id, el.cnt)}>-</button>
                         <span style={{padding: "0 10px"}}>{el.cnt}</span>
-                        <button>+</button>
+                        <button onClick={() => inc(el.id)}>+</button>
                     </td>
-                    <td>{el.price * el.cnt}&nbsp;руб.</td>
+                    <td>{el.price * el.cnt}&nbsp;₽</td>
                     <td>{el.discount > 0 && `${el.discount}%`}</td>
-                    <td></td>
+                    <td>{el.discount > 0 && <>{setPrice(el).toFixed(2)}&nbsp;₽</>}</td>
                 </tr>)}
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colSpan={3}>Итоговая сумма:</td>
+                    <td colSpan={3}>{sale.toFixed(2)} ₽<del>{sum} ₽</del></td>
+                </tr>
+            </tfoot>
         </table>
         </>
     )

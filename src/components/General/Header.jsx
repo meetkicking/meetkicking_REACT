@@ -11,19 +11,22 @@ const Header = ({user, setModalActive, serverGoods}) => {
 
     const [cartCnt, setCartCnt] = useState(0);
 
-    const {basket} = useState(Ctx);
+    const {basket} = useContext(Ctx);
 
     useEffect(() => {
         setLikeCnt(serverGoods.filter(element => element.likes.includes(localStorage.getItem("rockId"))).length);
     }, [serverGoods]);
 
-    {/*
     useEffect(() => {
-        if (basket.length) {
-        setCartCnt(basket.reduce((acc, el) => acc + el.cnt, 0));
-        }
+        //if (basket) {
+        //let cnt = 0;
+        //for (let i = 0; i < basket.length; i++) {
+        //    cnt += basket[i].cnt;
+        //}
+        //setCartCnt(cnt);
+        //}
+        setCartCnt(basket.reduce((acc, el) => acc + el.cnt, 0))
     }, [basket])
-*/}
 
     const logIn = (event) => {
         event.preventDefault();

@@ -73,14 +73,14 @@ const Card = ({
         </>
         : price
     }
-    &nbsp;рублей</span>
+    &nbsp;₽</span>
     <button className="card__btn"
     onClick={addToCart}
     disabled={inBasket}
     >В корзину</button>
-    <span className="card__tags">
+    { <span className="card__tags">
         {tags.map(element => <span key={element}>{element}</span>)}
-    </span>
+    </span> }
     </Link>
 }
 
