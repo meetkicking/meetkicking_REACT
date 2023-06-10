@@ -28,8 +28,8 @@
     border: none;
     outline: none;
     height: 30px;
-    background-color: darkslateblue;
-    color: white;
+    background-color: yellow;
+    color: black;
     border-radius: 4px;
     cursor: pointer;
 }

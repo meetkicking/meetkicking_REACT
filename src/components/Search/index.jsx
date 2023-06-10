@@ -43,7 +43,7 @@ const Search = ({array}) => {
     return (
     <div className="search-block">
         <input type="search" className="search" placeholder="Поиск..." value={text} onChange={searchByText}/>
-        <button onClick={click}>Bork</button>
+        <button onClick={click}>Поиск</button>
         <hr/>
         {/*<div>{text}, {n}, {count}</div>*/}
         <div>По вашему запросу " {text} " найдено {quantity} подходящих товаров</div>

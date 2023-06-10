@@ -11,7 +11,7 @@
 }
 
 header {
-    background-color: silver;
+    background-color: rgb(255, 238, 0);
     color: black;
     display: flex;
     align-items: center;
