@@ -28,14 +28,14 @@
     border: none;
     outline: none;
     height: 30px;
-    background-color: yellow;
+    background-color: rgb(255, 238, 0);
     color: black;
     border-radius: 4px;
     cursor: pointer;
 }
 
 .card__btn:hover {
-    background-color: chocolate;
+    background-color: orange;
 }
 
 .card__btn:disabled {

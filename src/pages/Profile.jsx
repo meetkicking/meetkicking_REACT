@@ -24,7 +24,7 @@ const Profile = ({ user, color, setUser }) => {
             <h1>Личный кабинет</h1>
             <div>
                 Добро пожаловать,&nbsp;
-                <span style={captionStyle}>{user}</span>
+                <span style={{fontWeight: "bold", color: "orange"}}>{user}</span>
                 !
             </div>
             <a href="" onClick={logOut} title="Выйти">
