@@ -1,6 +1,7 @@
 import { useState, useEffect, useContext } from "react";
 import Ctx from "../../context";
 import "./style.css"
+import { Link } from "react-router-dom";
 
 const Search = ({array}) => {
     // let text = "Bass";
@@ -43,7 +44,9 @@ const Search = ({array}) => {
     return (
     <div className="search-block">
         <input type="search" className="search" placeholder="Поиск..." value={text} onChange={searchByText}/>
+        <Link to="/catalog">
         <button onClick={click}>Поиск</button>
+        </Link>
         <hr/>
         {/*<div>{text}, {n}, {count}</div>*/}
         <div>По вашему запросу " {text} " найдено {quantity} подходящих товаров</div>

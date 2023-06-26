@@ -39,9 +39,11 @@ const Product = () => {
         <h1>{product.name}</h1>
         <img src={product.pictures} alt={product.name} height="300px" width="300px"/>
         <mark>{product.price}руб.</mark>
+        <mark>{product.description}</mark>
         </>
         : <Loader/>
         }
+        
         {/*
             <h1>
             {product.name ? product.name : "Страница одного товара"}
