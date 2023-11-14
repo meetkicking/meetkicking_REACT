@@ -3,7 +3,7 @@ import Ctx from "../../context";
 import "./style.css";
 
 const News = () => {
-    const {news} = useContext(Ctx);
+    const { news } = useContext(Ctx);
     const [data, setData] = useState(news || []);
 
     useEffect(() => {
@@ -15,25 +15,25 @@ const News = () => {
             setData(updateArr);
         }, 2000)
         return () => clearTimeout(id);
-    //}se {  //setData(news.slice(0, 4));
-}, [data])
-    
+        //}se {  //setData(news.slice(0, 4));
+    }, [data])
+
     useEffect(() => {
         setData(news);
     }, [news])
 
     return (
         <>
-        <div>
-            <h2>Новости Lenta.ru</h2>
-            <div className="news-block">
-                {data.slice(0, 4).map((el, ind) => <img 
-                key={ind} 
-                src={el.urlToImage} 
-                alt={el.title}
-                />)}
+            <div>
+                <h2>Новости</h2>
+                <div className="news-block">
+                    {data.slice(0, 4).map((el, ind) => <img
+                        key={ind}
+                        src={el.urlToImage}
+                        alt={el.title}
+                    />)}
+                </div>
             </div>
-        </div>
         </>
     )
 }
